@@ -83,7 +83,7 @@ describe('TestCasesTests', () => {
             job: "leader"
         };
 
-        const responseEntity = await metergramClient.createUser(userRequest);
+        const responseEntity = await metergramClient.createUser(userRequest.name, userRequest.job);
         expect(responseEntity.status).toEqual(201);
         expect(responseEntity.data.name).toEqual(userRequest.name);
         expect(responseEntity.data.job).toEqual(userRequest.job);

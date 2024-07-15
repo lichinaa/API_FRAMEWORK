@@ -18,6 +18,11 @@ export class MetergramClient extends BaseClient {
         password: ""
     };
 
+    private createUserRequest : CreateUserRequest = {
+        name: "",
+        job: ""
+    }
+
     constructor() {
         super();
         this.baseUrl = HOSTNAME;
@@ -27,6 +32,21 @@ export class MetergramClient extends BaseClient {
         // this.addHeader("Authorization", `Bearer ${this.Token}`);
     }
 
+    public setName(name: string): void {
+        this.createUserRequest.name = name;
+    }
+
+    public getName(): string {
+        return this.createUserRequest.name;
+    }
+
+    public setJob(job: string): void {
+        this.createUserRequest.job = job;
+    }
+
+    public getJob(): string {
+        return this.createUserRequest.job;
+    }
 
     // public async authenticateOnTheSite(postAuthRequestBody: PostAuthRequestBody): Promise<AxiosResponse<PostAuthResponseBody>> {
     //     return this.post<PostAuthResponseBody>("/register", postAuthRequestBody);
@@ -44,8 +64,10 @@ export class MetergramClient extends BaseClient {
         return this.get("users?page=" + page+"&per_page="+per_page);
     }
 
-    public createUser(user: CreateUserRequest): ResponseEntity<CreateUserResponse>{
-        return this.post("users", user)
+    public createUser(name: string, job: string): ResponseEntity<CreateUserResponse>{
+        this.setName(name);
+        this.setJob(job);
+        return this.post("users", this.createUserRequest)
     }
 
     public async deleteUser(userId: number): Promise<AxiosResponse<void>>{
