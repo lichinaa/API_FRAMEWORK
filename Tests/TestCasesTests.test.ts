@@ -5,7 +5,7 @@ import {GetListUsersResponseBody} from "../model/get/GetListUsersResponseBody";
 import {CreateUserRequest} from "../model/post/CreateUserRequest";
 
 
-describe('TestCasesTests', () => {
+describe('Tests for Metergram client', () => {
     let metergramClient: MetergramClient;
 
     beforeEach(() => {
